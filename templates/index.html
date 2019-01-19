@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Scrape Mars Data</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/solar/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1 class="text-white">Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <div class="row" id="mars-headline">
+      <div class="col-md-12">
+        <h3 class="heading text-white">Latest Mars News</h3>
+          <h4 class="heading">{{mars.news_title}}</h4>
+        <p>{{mars.news_p}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-7" id="mars-image">
+        <h3 class="heading text-white">Featured Mars Image</h3>
+          <img class= "img-fluid" src={{mars.featured_image_url}} >
+      </div>
+      <div class="col-md-5" id="mars-image">
+          <div class="card text-white border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">@MarsWxReport</div>
+            <div class="card-body">
+              <h4 class="card-title">Current Weather on Mars</h4>
+              <p class="card-text">{{mars.mars_weather}}</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <h3 class="heading text-white">Mars Facts</h3>
+            {{mars.mars_facts|safe}}
+          </div>
+      </div>
+    </div> 
+    <h1 align="center" class="Hemispheres text-white">Mars Hemispheres</h1>
+    <hr>
+    <div class="row">
+        {% for url in mars.hemisphere_image_urls%}
+        <div class="col-lg-6">
+            <div class="card mb-3">
+              <h3 class="card-header text-white">{{ url.title}}</h3>
+              <div class="card-body">
+                <img src="{{ url.img_url|safe}}" class="img-fluid">
+              </div>
+          </div>
+        </div>
+          {% endfor %}
+    </div>
+
+  </div>
+
+</body>
+
+</html>
